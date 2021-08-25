@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Storage Demo
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,12 +9,45 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Storage Demo</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-list>
+          <ion-list-header>
+            Set Storage
+          </ion-list-header>
+          <ion-item>
+            <ion-label position="floating">Key</ion-label>
+            <ion-input [(ngModel)]="key"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Value</ion-label>
+            <ion-input [(ngModel)]="value" (keyup.enter)="setStorage()"></ion-input>
+          </ion-item>
+        </ion-list>
+        <ion-button expand="block" (click)="setStorage()">Save Value</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item lines="none">
+          <ion-label>Enter Key: </ion-label>
+          <ion-input clearInput #ionInput (keyup.enter)="readStorage(ionInput.value)"></ion-input>
+          <ion-button slot="end" color="secondary" (click)="readStorage(ionInput.value)">
+            Get Value
+          </ion-button>
+        </ion-item>
+
+        <ion-item lines="none" *ngIf="storageValue">
+          <ion-label>Key: {{ storageKey }}</ion-label>
+          <ion-label>Value: {{ storageValue }}</ion-label>
+        </ion-item>
+        <ion-button expand="block" color="danger" (click)="reset()">clear storage</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
