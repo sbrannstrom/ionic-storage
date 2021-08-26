@@ -25,6 +25,7 @@ export class HomePage {
 
   async readStorage(e: any) {
     this.storageValue = await this.storage.get(e);
+    console.log('Read from storage, value ::', this.storageValue);
     this.storageKey = e;
     if (!this.storageValue) {
       this.storageValue = 'Not found!';
